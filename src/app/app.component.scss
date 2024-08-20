@@ -46,3 +46,10 @@ mat-toolbar-row {
 .router-container {
 	padding: 16px 56px 0 56px;
 }
+
+.logo {
+	max-width: 100%;
+	height: 40px;
+	filter: invert(52%) sepia(17%) saturate(412%) hue-rotate(169deg)
+		brightness(91%) contrast(88%);
+}

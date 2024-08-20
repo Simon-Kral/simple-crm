@@ -1,11 +1,21 @@
-<p>user works!</p>
-
-<button
-	(click)="openDialog()"
-	class="add-user-btn"
-	mat-fab
-	color="primary"
-	matTooltip="Add user"
->
+<mat-card appearance="outlined">
+	<mat-card-content>
+		<table class="user-table">
+			<tr>
+				<th>Name</th>
+				<th>E-Mail</th>
+				<th>City</th>
+			</tr>
+			@for (user of userListSig(); track $index) {
+			<tr [routerLink]="['/user/' + user.id]">
+				<td>{{ user.firstName }} {{ user.lastName }}</td>
+				<td>{{ user.email }}</td>
+				<td>{{ user.city }}</td>
+			</tr>
+			}
+		</table>
+	</mat-card-content>
+</mat-card>
+<button (click)="openDialog()" class="add-user-btn" mat-fab color="primary" matTooltip="Add user">
 	<mat-icon>add</mat-icon>
 </button>
