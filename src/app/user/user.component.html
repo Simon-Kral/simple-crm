@@ -6,7 +6,7 @@
 				<th>E-Mail</th>
 				<th>City</th>
 			</tr>
-			@for (user of userListSig(); track $index) {
+			@for (user of firestoreService.userListSig(); track $index) {
 			<tr [routerLink]="['/user/' + user.id]">
 				<td>{{ user.firstName }} {{ user.lastName }}</td>
 				<td>{{ user.email }}</td>

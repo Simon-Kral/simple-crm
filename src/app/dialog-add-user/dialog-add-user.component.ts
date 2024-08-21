@@ -11,10 +11,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { User } from '../../models/user.class';
+import { User } from '../models/user.class';
 import { FormsModule } from '@angular/forms';
-import { addDoc, collection, Firestore } from '@angular/fire/firestore';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { FirestoreService } from '../services/firestore/firestore.service';
 
 @Component({
 	selector: 'app-dialog-add-user',
@@ -38,19 +38,19 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 })
 export class DialogAddUserComponent {
 	readonly dialogRef = inject(MatDialogRef<DialogAddUserComponent>);
+	firestoreService = inject(FirestoreService);
 	user: User = new User();
 	birthdate: Date = new Date();
-	firestore = inject(Firestore);
 	loading: boolean = false;
 
 	saveUser() {
 		this.loading = true;
 		this.user.birthDate = this.birthdate.getTime();
-		addDoc(collection(this.firestore, 'users'), this.user.toJSON()).then(
-			() => {
+		this.firestoreService.addUser(this.user).subscribe({
+			next: () => {
 				this.loading = false;
 				this.dialogRef.close();
-			}
-		);
+			},
+		});
 	}
 }

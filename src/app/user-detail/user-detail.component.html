@@ -1,1 +1,28 @@
-<p>user-detail works!</p>
+<mat-card class="user-detail-header p-16">
+	<button mat-icon-button class="pin-right-upper-corner" [matMenuTriggerFor]="infoMenu">
+		<mat-icon class="">more_vert</mat-icon>
+	</button>
+	<mat-menu #infoMenu="matMenu">
+		<button mat-menu-item (click)="editUserInfo()">Edit</button>
+	</mat-menu>
+	<img src="./assets/img/avatar.png" />
+	<div class="user-details">
+		<h2>{{ firestoreService.userSig().firstName }} {{ firestoreService.userSig().lastName }}</h2>
+		<span>{{ firestoreService.userSig().email }}</span>
+	</div>
+</mat-card>
+<mat-card class="mt-32 p-16">
+	<button mat-icon-button class="pin-right-upper-corner" [matMenuTriggerFor]="detailMenu">
+		<mat-icon class="">more_vert</mat-icon>
+	</button>
+	<mat-menu #detailMenu="matMenu">
+		<button mat-menu-item (click)="editUserDetail()">Edit</button>
+	</mat-menu>
+	<mat-card-header>
+		<mat-card-title>Address</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		{{ firestoreService.userSig().street }} <br />
+		{{ firestoreService.userSig().zipCode }} {{ firestoreService.userSig().city }}
+	</mat-card-content>
+</mat-card>
